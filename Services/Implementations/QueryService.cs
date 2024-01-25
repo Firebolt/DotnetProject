@@ -2,58 +2,57 @@
 using FinalProject.Repositories.Interfaces;
 using FinalProject.Services.Interfaces;
 
-//Adding repositories for models that require two keys might solve the errors
-
 namespace FinalProject.Services.Implementations
 {
     public class QueryService : IQueryService
     {
-        private readonly IRepository<Query> _queryRepository;
+        private readonly IQueryRepository _queryRepository;
+        private readonly IRepository<User> _user;
 
-        public QueryService(IRepository<Query> queryRepository)
+        public QueryService(IQueryRepository queryRepository, IRepository<User> user)
         {
             _queryRepository = queryRepository;
+            _user = user;
         }
 
         public async Task<IEnumerable<Query>> GetAllQueriesAsync()
         {
-            return await _queryRepository.GetAllAsync();
+            return await _queryRepository.GetAllQueriesAsync();
         }
 
-        public async Task<Query> GetQueryByIdAsync(int queryId)
+        public async Task<Query> GetQueryAsync(int queryId, int userId)
         {
-            return await _queryRepository.GetById(queryId);
+            return await _queryRepository.GetQueryAsync(queryId, userId);
         }
 
         public async Task CreateQueryAsync(QueryRequest queryRequest, int userId)
         {
-            IRepository<User> user;
             var newQuery = new Query
             {
                 UID = queryRequest.UID,
                 Question = queryRequest.Question,
                 Answer = queryRequest.Answer,
-                User = user.GetById(userId)
+                User = await _user.GetById(userId)
             };
 
-            await _queryRepository.Add(newQuery);
+            await _queryRepository.AddQueryAsync(newQuery);
         }
 
-        public async Task UpdateQueryAsync(int queryId, QueryRequest updatedQueryRequest)
+        public async Task UpdateQueryAsync(int queryId, int userId, QueryRequest updatedQueryRequest)
         {
-            var existingQuery = await _queryRepository.GetById(queryId);
+            var existingQuery = await _queryRepository.GetQueryAsync(queryId, userId);
             if (existingQuery != null)
             {
                 existingQuery.Question = updatedQueryRequest.Question;
                 existingQuery.Answer = updatedQueryRequest.Answer;
 
-                await _queryRepository.Update(existingQuery);
+                await _queryRepository.UpdateQueryAsync(existingQuery);
             }
         }
 
-        public async Task DeleteQueryAsync(int queryId)
+        public async Task DeleteQueryAsync(int queryId, int userId)
         {
-            await _queryRepository.Delete(queryId);
+            await _queryRepository.DeleteQueryAsync(queryId, userId);
         }
     }
 }

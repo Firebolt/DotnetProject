@@ -5,9 +5,9 @@ namespace FinalProject.Services.Interfaces
     public interface IQueryService
     {
         Task<IEnumerable<Query>> GetAllQueriesAsync();
-        Task<Query> GetQueryByIdAsync(int queryId);
-        Task CreateQueryAsync(QueryRequest queryRequest);
-        Task UpdateQueryAsync(int queryId, QueryRequest updatedQueryRequest);
-        Task DeleteQueryAsync(int queryId);
+        Task<Query> GetQueryAsync(int queryId, int userId);
+        Task CreateQueryAsync(QueryRequest queryRequest, int userId);
+        Task UpdateQueryAsync(int queryId, int userId, QueryRequest updatedQueryRequest);
+        Task DeleteQueryAsync(int queryId, int  userId);
     }
 }

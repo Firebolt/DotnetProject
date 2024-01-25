@@ -6,21 +6,21 @@ namespace FinalProject.Services.Implementations
 {
     public class TicketService : ITicketService
     {
-        private readonly IRepository<Ticket> _ticketRepository;
+        private readonly ITicketRepository _ticketRepository;
 
-        public TicketService(IRepository<Ticket> ticketRepository)
+        public TicketService(ITicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
 
         public async Task<IEnumerable<Ticket>> GetAllTicketsAsync()
         {
-            return await _ticketRepository.GetAllAsync();
+            return await _ticketRepository.GetAllTicketAsync();
         }
 
-        public async Task<Ticket> GetTicketByIdAsync(int userId, int flightId)
+        public async Task<Ticket> GetTicketAsync(int userId, int flightId)
         {
-            return await _ticketRepository.GetById(userId, flightId);
+            return await _ticketRepository.GetTicketAsync(userId, flightId);
         }
 
         public async Task CreateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber)
@@ -33,24 +33,24 @@ namespace FinalProject.Services.Implementations
                 SeatNumber = seatNumber
             };
 
-            await _ticketRepository.Add(newTicket);
+            await _ticketRepository.AddTicketAsync(newTicket);
         }
 
         public async Task UpdateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber)
         {
-            var existingTicket = await _ticketRepository.GetById(userId, flightId);
+            var existingTicket = await _ticketRepository.GetTicketAsync(userId, flightId);
             if (existingTicket != null)
             {
                 existingTicket.BookedDate = bookedDate;
                 existingTicket.SeatNumber = seatNumber;
 
-                await _ticketRepository.Update(existingTicket);
+                await _ticketRepository.UpdateTicketAsync(existingTicket);
             }
         }
 
         public async Task DeleteTicketAsync(int userId, int flightId)
         {
-            await _ticketRepository.Delete(userId, flightId);
+            await _ticketRepository.DeleteTicketAsync(userId, flightId);
         }
     }
 }

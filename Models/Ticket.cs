@@ -4,12 +4,15 @@ namespace FinalProject.Models
 {
     public class Ticket
     {
-        //please add required annotation to the models
         [Key]
+        [Required]
         public int UID { get; set; }
         [Key]
+        [Required]
         public int FID { get; set; }
+        [Required, DataType(DataType.Date)]
         public DateTime BookedDate { get; set; }
+        [Required]
         public string? SeatNumber { get; set; }
 
     }

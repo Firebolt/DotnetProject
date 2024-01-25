@@ -9,6 +9,7 @@ namespace FinalProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
      public int FID{ get; set; }
+        [Required]
      public int NumofSeat { get; set; }
         [Required,DataType(DataType.Currency)]
      public decimal TicketCost { get; set; }
