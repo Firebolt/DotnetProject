@@ -4,6 +4,7 @@ namespace FinalProject.Models
 {
     public class Ticket
     {
+        //please add required annotation to the models
         [Key]
         public int UID { get; set; }
         [Key]

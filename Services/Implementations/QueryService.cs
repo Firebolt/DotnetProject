@@ -2,6 +2,8 @@
 using FinalProject.Repositories.Interfaces;
 using FinalProject.Services.Interfaces;
 
+//Adding repositories for models that require two keys might solve the errors
+
 namespace FinalProject.Services.Implementations
 {
     public class QueryService : IQueryService
