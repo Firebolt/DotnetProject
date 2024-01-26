@@ -17,7 +17,6 @@ namespace FinalProject.Models
         public required string Password { get; set; }
         [Required]
         public Role UserRole { get; set; }
-
     }
     public enum Role
     {

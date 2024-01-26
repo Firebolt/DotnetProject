@@ -14,6 +14,5 @@ namespace FinalProject.Models
         public DateTime BookedDate { get; set; }
         [Required]
         public string? SeatNumber { get; set; }
-
     }
 }
