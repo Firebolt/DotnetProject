@@ -29,13 +29,14 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> FilterFlights(string takeoffLocation, string destination)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost)
         {
             var filteredFlights = await _flightService.GetAllFlightsAsync();
             filteredFlights = filteredFlights
                 .Where(f =>
                     (string.IsNullOrEmpty(takeoffLocation) || f.TakeOffLocation == takeoffLocation) &&
-                    (string.IsNullOrEmpty(destination) || f.Destination == destination))
+                    (string.IsNullOrEmpty(destination) || f.Destination == destination) &&
+                    f.TicketCost <= maxTicketCost)
                 .ToList();
 
             return PartialView("_FlightList", filteredFlights);
