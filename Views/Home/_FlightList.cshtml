@@ -1,0 +1,52 @@
+@model IEnumerable<FinalProject.Models.Flight>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TakeOffLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeparDateandTimeOffset)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrDateandTimeOffset)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportLoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDuration)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.TakeOffLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.Destination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.DeparDateandTimeOffset)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.ArrDateandTimeOffset)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.AirportLoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => flight.FlightDuration)
+                </td>
+                <td>
+                    @Html.ActionLink("Book ticket", "Book", new {id = flight.FID})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

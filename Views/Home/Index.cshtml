@@ -1,8 +1,75 @@
-﻿@{
+﻿@model IEnumerable<FinalProject.Models.Flight>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewData["Title"]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    </head>
+    <body>
+
+    <div class="sidebar">
+        <h2>Filter Flights</h2>
+        <form id="filterForm">
+            <div class="form-group">
+                <label for="takeoffLocation">Takeoff Location:</label>
+                @{
+                    var takeoffLocations = Model.Select(f => f.TakeOffLocation).Distinct().ToList();
+                    takeoffLocations.Insert(0, "All");
+                }
+                @Html.DropDownList("takeoffLocation", new SelectList(takeoffLocations))
+            </div>
+
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                @{
+                    var destinations = Model.Select(f => f.Destination).Distinct().ToList();
+                    destinations.Insert(0, "All");
+                }
+                @Html.DropDownList("destination", new SelectList(destinations))
+            </div>
+            <button type="button" onclick="filterFlights()">Apply Filters</button>
+        </form>
+    </div>
+
+    <div id="flightTable">
+        <!-- This is where the filtered flight data will be displayed -->
+        @Html.Partial("_FlightList")
+    </div>
+
+    @section scripts {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                filterFlights();
+            });
+
+            function filterFlights() {
+                var takeoffLocation = $("#takeoffLocation").val();
+                var destination = $("#destination").val();
+                if (takeoffLocation === "All") {
+                    takeoffLocation = ""; // Set it to an empty string or adjust as needed
+                }
+                if (destination === "All") {
+                    destination = ""; // Set it to an empty string or adjust as needed
+                }
+
+                $.ajax({
+                    url: '@Url.Action("FilterFlights", "Home")',
+                    type: 'GET',
+                    data: { takeoffLocation: takeoffLocation, destination: destination },
+                    success: function (data) {
+                        $("#flightTable").html(data);
+                    }
+                });
+            }
+        </script>
+    }
+    </body>
+</html>

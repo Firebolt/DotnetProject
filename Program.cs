@@ -1,6 +1,8 @@
 using FinalProject.Models;
 using FinalProject.Repositories.Implementations;
 using FinalProject.Repositories.Interfaces;
+using FinalProject.Services.Implementations;
+using FinalProject.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,20 +18,23 @@ namespace FinalProject
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+            builder.Services.AddScoped<ITicketService, TicketService>();
             builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+            builder.Services.AddScoped<ISeatService, SeatService>();
             builder.Services.AddScoped<IQueryRepository, QueryRepository>();
-
-
-
-
+            builder.Services.AddScoped<IQueryService, QueryService>();
+            builder.Services.AddScoped<IRepository<Flight>, Repository<Flight>>();
+            builder.Services.AddScoped<IFlightService, FlightService>();
+            builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .Build();
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-;
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            ;
 
             var app = builder.Build();
 

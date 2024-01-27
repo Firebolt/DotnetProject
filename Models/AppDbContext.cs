@@ -13,7 +13,7 @@ namespace FinalProject.Models
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                // Configure entity relationships and constraints
+                modelBuilder.Entity<Ticket>().HasKey(x => new {x.UID, x.FID});
             }
         }
     }

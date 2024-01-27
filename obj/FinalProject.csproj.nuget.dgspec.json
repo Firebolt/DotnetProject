@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/firebolt/UniversityWork/FinalProject/FinalProject/FinalProject.csproj": {}
+    "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj": {}
   },
   "projects": {
-    "/home/firebolt/UniversityWork/FinalProject/FinalProject/FinalProject.csproj": {
+    "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/firebolt/UniversityWork/FinalProject/FinalProject/FinalProject.csproj",
+        "projectUniqueName": "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj",
         "projectName": "FinalProject",
-        "projectPath": "/home/firebolt/UniversityWork/FinalProject/FinalProject/FinalProject.csproj",
+        "projectPath": "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj",
         "packagesPath": "/home/firebolt/.nuget/packages/",
-        "outputPath": "/home/firebolt/UniversityWork/FinalProject/FinalProject/obj/",
+        "outputPath": "/home/firebolt/UniversityWork/git/DotnetProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/firebolt/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0, )"
