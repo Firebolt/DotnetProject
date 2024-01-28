@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalProject.Models
 {
-    public class User
+    public class User : IdentityUser
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,5 +22,4 @@ namespace FinalProject.Models
     {
         Passenger, TicketAgent, Administrator
     }
-
 }

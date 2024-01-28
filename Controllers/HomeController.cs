@@ -2,11 +2,10 @@
 using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Web.Mvc;
 
 namespace FinalProject.Controllers
 {
-    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IFlightService _flightService;
@@ -17,7 +16,7 @@ namespace FinalProject.Controllers
             _flightService = flightService;
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var flights = await _flightService.GetAllFlightsAsync();
@@ -29,7 +28,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost)
+        public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost)
         {
             var filteredFlights = await _flightService.GetAllFlightsAsync();
             filteredFlights = filteredFlights

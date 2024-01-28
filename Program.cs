@@ -4,7 +4,8 @@ using FinalProject.Repositories.Interfaces;
 using FinalProject.Services.Implementations;
 using FinalProject.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 namespace FinalProject
 {
@@ -17,6 +18,10 @@ namespace FinalProject
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddScoped<ITicketService, TicketService>();
             builder.Services.AddScoped<ISeatRepository, SeatRepository>();
@@ -27,6 +32,14 @@ namespace FinalProject
             builder.Services.AddScoped<IFlightService, FlightService>();
             builder.Services.AddScoped<IRepository<User>, Repository<User>>();
             builder.Services.AddScoped<IUserService, UserService>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromDays(1); 
+                    options.LoginPath = "/Account/Login"; 
+                });
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -51,6 +64,7 @@ namespace FinalProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

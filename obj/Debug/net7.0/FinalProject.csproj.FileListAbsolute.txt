@@ -131,3 +131,4 @@ C:/Users/user/source/repos/FinalProject/FinalProject/obj/Debug/net7.0/ref/FinalP
 /home/firebolt/UniversityWork/git/DotnetProject/bin/Debug/net7.0/System.Web.WebPages.Razor.dll
 /home/firebolt/UniversityWork/git/DotnetProject/bin/Debug/net7.0/System.Web.WebPages.dll
 /home/firebolt/UniversityWork/git/DotnetProject/bin/Debug/net7.0/Microsoft.Web.Infrastructure.dll
+/home/firebolt/UniversityWork/git/DotnetProject/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
