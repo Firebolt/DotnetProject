@@ -27,12 +27,21 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <button class="btn btn-link nav-link text-dark" id="logoutButton" type="button">Logout</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -55,3 +64,35 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutConfirmationModalLabel">Confirm Logout</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelLogoutButton" data-dismiss="modal">Cancel</button>
+                <form id="logoutForm" asp-action="Logout" asp-controller="Account" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary" id="confirmLogoutButton">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#logoutButton').on('click', function () {
+            $('#logoutConfirmationModal').modal('show');
+        });
+
+        $('#cancelLogoutButton').on('click', function () {
+            $('#logoutConfirmationModal').modal('hide');
+        });
+    });
+</script>

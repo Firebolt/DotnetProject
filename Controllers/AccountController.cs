@@ -1,5 +1,4 @@
 using FinalProject.Models;
-using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +11,16 @@ namespace FinalProject.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
+        public AccountController(
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+        }
 
         [HttpGet]
         public IActionResult Register()
@@ -54,9 +63,8 @@ namespace FinalProject.Controllers
             {
                 var user = new User
                 {
-                    Username = model.Username,
+                    UserName = model.Username,
                     Email = model.Email,
-                    Password = model.Password,
                     UserRole = model.UserRole
                 };
 
@@ -95,7 +103,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(UserRequest model, [FromQuery] string ReturnUrl = null)
+        public async Task<IActionResult> Login(LoginRequest model, [FromQuery] string ReturnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -124,16 +132,10 @@ namespace FinalProject.Controllers
             }
             return View(model);
         }
-        
-        [HttpGet]
-        public IActionResult Logout()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogoutView()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
 

@@ -1,57 +1,67 @@
 ﻿using FinalProject.Models;
-using FinalProject.Repositories.Interfaces;
 using FinalProject.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Services.Implementations
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly UserManager<User> _userManager;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(UserManager<User> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await _userRepository.GetAllAsync();
+            return await _userManager.Users.ToListAsync();
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _userRepository.GetById(userId);
+            return await _userManager.FindByIdAsync(userId.ToString());
         }
 
         public async Task CreateUserAsync(UserRequest userRequest)
         {
             var newUser = new User
             {
-                Username = userRequest.Username,
-                Password = userRequest.Password,
+                UserName = userRequest.Username,
                 UserRole = userRequest.UserRole,
                 Email = userRequest.Email
             };
 
-            await _userRepository.Add(newUser);
+            await _userManager.CreateAsync(newUser, userRequest.Password);
         }
 
         public async Task UpdateUserAsync(int userId, UserRequest updatedUserRequest)
         {
-            var existingUser = await _userRepository.GetById(userId);
+            var existingUser = await _userManager.FindByIdAsync(userId.ToString());
             if (existingUser != null)
             {
-                existingUser.Username = updatedUserRequest.Username;
-                existingUser.Password = updatedUserRequest.Password;
+                existingUser.UserName = updatedUserRequest.Username;
+                existingUser.Email = updatedUserRequest.Email;
                 existingUser.UserRole = updatedUserRequest.UserRole;
 
-                await _userRepository.Update(existingUser);
+                if (!string.IsNullOrEmpty(updatedUserRequest.Password))
+                {
+                    var newPasswordHash = _userManager.PasswordHasher.HashPassword(existingUser, updatedUserRequest.Password);
+                    existingUser.PasswordHash = newPasswordHash;
+                }
+
+                await _userManager.UpdateAsync(existingUser);
             }
         }
 
         public async Task DeleteUserAsync(int userId)
         {
-            await _userRepository.Delete(userId);
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
         }
     }
 }

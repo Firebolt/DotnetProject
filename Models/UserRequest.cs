@@ -16,7 +16,5 @@ namespace FinalProject.Models
         [Required, Display(Name = "User Role")]
         public Role UserRole { get; set; }
         public IEnumerable<SelectListItem>? UserRoleList { get; set; }
-        [Display(Name = "Remember me")]
-        public bool RememberMe { get; set; }
     }
 }
