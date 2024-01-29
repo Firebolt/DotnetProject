@@ -49,7 +49,7 @@
                     @Html.ActionLink("Book ticket", "Book", new {id = flight.FID})
                 </td>
                 @if (User.IsInRole("TicketAgent"))
-                {w
+                {
                     <td>
                         @Html.ActionLink("View all seats", "Bookings")
                     </td>
