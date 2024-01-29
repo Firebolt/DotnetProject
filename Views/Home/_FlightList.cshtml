@@ -1,24 +1,26 @@
 @model IEnumerable<FinalProject.Models.Flight>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<FinalProject.Models.User> UserManager
 <table class = "table">
     <thead>
         <tr>
             <th>
-                Takeoff Location
+                @Html.DisplayNameFor(model => model.TakeOffLocation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
-                Departure Date and Time
+                @Html.DisplayNameFor(model => model.DeparDateandTimeOffset)
             </th>
             <th>
-                Arrival Date and Time
+                @Html.DisplayNameFor(model => model.ArrDateandTimeOffset)
             </th>
             <th>
-                Airport Location
+                @Html.DisplayNameFor(model => model.AirportLoc)
             </th>
             <th>
-                Flight Duration
+                @Html.DisplayNameFor(model => model.FlightDuration)
             </th>
         </tr>
     </thead>
@@ -46,7 +48,28 @@
                 <td>
                     @Html.ActionLink("Book ticket", "Book", new {id = flight.FID})
                 </td>
+                @if (User.IsInRole("TicketAgent"))
+                {w
+                    <td>
+                        @Html.ActionLink("View all seats", "Bookings")
+                    </td>
+                }
+                @if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditFlight", "Admin", new {id = flight.FID})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteFlight", "Admin", new {id = flight.FID})
+                    </td>
+                }
             </tr>
         }
     </tbody>
 </table>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Add new flight", "Add")
+    </p>
+}

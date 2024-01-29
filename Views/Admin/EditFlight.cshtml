@@ -1,0 +1,47 @@
+@model FinalProject.Models.FlightRequest
+
+@using (Html.BeginForm("Editflight", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumofRows)
+        @Html.TextAreaFor(model => model.NumofRows)
+        @Html.ValidationMessageFor(model=> model.NumofRows)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TicketCost)
+        @Html.TextAreaFor(model => model.TicketCost)
+        @Html.ValidationMessageFor(model=> model.TicketCost)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeparDateandTimeOffset)
+        @Html.TextAreaFor(model => model.DeparDateandTimeOffset)
+        @Html.ValidationMessageFor(model=> model.DeparDateandTimeOffset)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ArrDateandTimeOffset)
+        @Html.TextAreaFor(model => model.ArrDateandTimeOffset)
+        @Html.ValidationMessageFor(model=> model.ArrDateandTimeOffset)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Destination)
+        @Html.TextAreaFor(model => model.Destination)
+        @Html.ValidationMessageFor(model=> model.Destination)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TakeOffLocation)
+        @Html.TextAreaFor(model => model.TakeOffLocation)
+        @Html.ValidationMessageFor(model=> model.TakeOffLocation)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AirportLoc)
+        @Html.TextAreaFor(model => model.AirportLoc)
+        @Html.ValidationMessageFor(model=> model.AirportLoc)
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to list", "QueryList")
+</div>

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FinalProject.Models
 {
@@ -10,20 +11,20 @@ namespace FinalProject.Models
       [Required]
       public int FID{ get; set; }
       [Required]
-      public int NumofSeat { get; set; }
-      [Required,DataType(DataType.Currency)]
+      public int NumofRows { get; set; }
+      [Required,DataType(DataType.Currency), DisplayName("Ticket Cost")]
       public decimal TicketCost { get; set; }
-      [Required, DataType(DataType.DateTime)]
+      [Required, DataType(DataType.DateTime), DisplayName("Departure Time")]
       public DateTimeOffset DeparDateandTimeOffset { get; set; }
-      [Required, DataType(DataType.DateTime)]
+      [Required, DataType(DataType.DateTime), DisplayName("Arrival Time")]
       public DateTimeOffset ArrDateandTimeOffset { get; set; }
       [Required]
       public required string Destination { get; set; }
-      [Required]
+      [Required, DisplayName("Takeoff Location")]
       public required string TakeOffLocation { get; set; }
-      [Required,DataType(DataType.Time)]
+      [Required,DataType(DataType.Time), DisplayName("Flight Duration")]
       public TimeSpan FlightDuration { get; set; }
-      [Required]
+      [Required, DisplayName("Airport Location")]
       public required string AirportLoc { get; set; }
    }
 }

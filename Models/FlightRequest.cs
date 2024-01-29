@@ -4,7 +4,7 @@ namespace FinalProject.Models
 {
     public class FlightRequest
     {   
-        public int NumofSeat { get; set; }
+        public int NumofRows { get; set; }
         [Required, DataType(DataType.Currency)]
         public decimal TicketCost { get; set; }
         [Required, DataType(DataType.DateTime)]

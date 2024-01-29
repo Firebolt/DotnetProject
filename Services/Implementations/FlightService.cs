@@ -27,7 +27,7 @@ namespace FinalProject.Services.Implementations
         {
             var newFlight = new Flight
             {
-                NumofSeat = flightRequest.NumofSeat,
+                NumofRows = flightRequest.NumofRows,
                 TicketCost = flightRequest.TicketCost,
                 DeparDateandTimeOffset = flightRequest.DeparDateandTimeOffset,
                 ArrDateandTimeOffset = flightRequest.ArrDateandTimeOffset,
@@ -45,7 +45,7 @@ namespace FinalProject.Services.Implementations
             var existingFlight = await _flightRepository.GetById(flightId);
             if (existingFlight != null)
             {
-                existingFlight.NumofSeat = updatedFlightRequest.NumofSeat;
+                existingFlight.NumofRows = updatedFlightRequest.NumofRows;
                 existingFlight.TicketCost = updatedFlightRequest.TicketCost;
                 existingFlight.DeparDateandTimeOffset = updatedFlightRequest.DeparDateandTimeOffset;
                 existingFlight.ArrDateandTimeOffset = updatedFlightRequest.ArrDateandTimeOffset;

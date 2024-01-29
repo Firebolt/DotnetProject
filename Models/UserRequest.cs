@@ -10,7 +10,7 @@ namespace FinalProject.Models
         [Required,DataType(DataType.Password)]
         public required string Password { get; set; }
         [DataType(DataType.Password), Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public required string ConfirmPassword { get; set; }
         [Required, DataType(DataType.EmailAddress)]
         public required string Email { get; set; }
         [Required, Display(Name = "User Role")]

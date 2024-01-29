@@ -14,6 +14,7 @@
 
     <div class="sidebar">
         <h2>Filter Flights</h2>
+        @Html.ActionLink("Add a new flight", "AddFlight", "Admin")
         <form id="filterForm">
             <div class="form-group">
                 <label for="takeoffLocation">Takeoff Location:</label>
@@ -35,7 +36,6 @@
                 <label for="maxTicketCost">Max Ticket Cost:</label>
                 <input type="range" id="maxTicketCostSlider" min="0" max="@Model.Max(f => f.TicketCost)" value="@Model.Max(f => f.TicketCost)">
                 <span id="maxTicketCostValue">@Model.Max(f => f.TicketCost)</span>
-                <input type="hidden" id="maxTicketCost" name="maxTicketCost" value="@Model.Max(f => f.TicketCost)">
             </div>
             <button type="button" onclick="filterFlights()">Apply Filters</button>
         </form>
@@ -55,24 +55,18 @@
             });
 
             function setupMaxTicketCostSlider() {
-                var maxTicketCostSlider = $("#maxTicketCostSlider")[0]; // Use [0] to get the DOM element
+                var maxTicketCostSlider = $("#maxTicketCostSlider")[0];
                 var maxTicketCostValue = $("#maxTicketCostValue");
 
-                maxTicketCostSlider.min = 0;
-                maxTicketCostSlider.max = @Model.Max(f => f.TicketCost);
-                maxTicketCostSlider.value = @Model.Max(f => f.TicketCost);
-
                 maxTicketCostSlider.addEventListener("input", function () {
-                    var value = maxTicketCostSlider.value;
-                    maxTicketCostValue.text(value);
-                    $("#maxTicketCost").val(value);
+                    maxTicketCostValue.text(maxTicketCostSlider.value);
                 });
             }
 
             function filterFlights() {
                 var takeoffLocation = $("#takeoffLocation").val();
                 var destination = $("#destination").val();
-                var maxTicketCost = $("#maxTicketCost").val();
+                var maxTicketCost = $("#maxTicketCostSlider").val();
                 if (takeoffLocation === "All") {
                     takeoffLocation = "";
                 }

@@ -39,6 +39,7 @@ namespace FinalProject.Controllers
                 Username = "",
                 Email = "",
                 Password = "",
+                ConfirmPassword = "",
                 UserRoleList = roles
             };
             
@@ -103,7 +104,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRequest model, [FromQuery] string ReturnUrl = null)
+        public async Task<IActionResult> Login(LoginRequest model, [FromQuery] string? ReturnUrl = null)
         {
             if (ModelState.IsValid)
             {
