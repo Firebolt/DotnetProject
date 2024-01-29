@@ -1,5 +1,6 @@
 ﻿using FinalProject.Models;
 using FinalProject.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -32,14 +33,15 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost)
+        public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost, int? id)
         {
             var filteredFlights = await _flightService.GetAllFlightsAsync();
             filteredFlights = filteredFlights
                 .Where(f =>
                     (string.IsNullOrEmpty(takeoffLocation) || f.TakeOffLocation == takeoffLocation) &&
                     (string.IsNullOrEmpty(destination) || f.Destination == destination) &&
-                    f.TicketCost <= maxTicketCost)
+                    f.TicketCost <= maxTicketCost &&
+                    (id == null || f.FID == id))
                 .ToList();
 
             return PartialView("_FlightList", filteredFlights);
@@ -62,6 +64,13 @@ namespace FinalProject.Controllers
         {
             await _queryService.CreateQueryAsync(body, _userManager.GetUserAsync(HttpContext.User).Id);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet, Authorize(Roles = "TicketAgent")]
+        public async Task<IActionResult> FlightDetails(int id)
+        {
+            var result = await _flightService.GetFlightByIdAsync(id);
+            return (result == null)? RedirectToAction("Index"): View(result);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
