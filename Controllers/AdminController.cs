@@ -9,10 +9,12 @@ namespace FinalProject.Controllers
     {
         private readonly IQueryService _queryService;
         private readonly IFlightService _flightService;
-        public AdminController(IQueryService queryService, IFlightService flightService)
+        private readonly ISeatService _seatService;
+        public AdminController(IQueryService queryService, IFlightService flightService, ISeatService seatService)
         {
             _queryService = queryService;
             _flightService = flightService;
+            _seatService = seatService;
         }
 
         [HttpGet]
@@ -53,18 +55,12 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> AddFlight(FlightRequest flight)
         {
             flight.FlightDuration = flight.ArrDateandTimeOffset.Subtract(flight.DeparDateandTimeOffset);
+            double total = flight.FlightDuration.TotalHours;
+            var smth = flight.FlightDuration.Duration();
             int fid = await _flightService.CreateFlightAsync(flight);
             for (int i = 0; i < 6; i++)
-                for (int j = 0; j < flight.NumofRows; j++)
-                {
-                    var seat = new Seat
-                    {
-                        Booked = false,
-                        FID = fid,
-                        Flight = await _flightService.GetFlightByIdAsync(fid),
-                        Name = GetSeatName(i, j)
-                    };
-                }
+                for (int j = 1; j <= flight.NumofRows; j++)
+                    _seatService.CreateSeatAsync(fid, GetSeatName(i, j));
             return RedirectToAction("Index", "Home");
         }
 
@@ -84,8 +80,8 @@ namespace FinalProject.Controllers
                 {
                     NumofRows = result.NumofRows,
                     AirportLoc = result.AirportLoc,
-                    ArrDateandTimeOffset = result.ArrDateandTimeOffset,
-                    DeparDateandTimeOffset = result.DeparDateandTimeOffset,
+                    ArrDateandTimeOffset = result.ArrDateandTimeOffset.ToUniversalTime(),
+                    DeparDateandTimeOffset = result.DeparDateandTimeOffset.ToUniversalTime(),
                     Destination = result.Destination,
                     TakeOffLocation = result.TakeOffLocation,
                     TicketCost = result.TicketCost
@@ -107,17 +103,17 @@ namespace FinalProject.Controllers
             switch (i)
             {
                 case 0:
-                    return j + " A";
+                    return j + "A";
                 case 1:
-                    return j + " B";
+                    return j + "B";
                 case 2:
-                    return j + " C";
+                    return j + "C";
                 case 3:
-                    return j + " D";
+                    return j + "D";
                 case 4:
-                    return j + " E";
+                    return j + "E";
                 case 5:
-                    return j + " F";
+                    return j + "F";
                 default:
                     return "Error";
             }

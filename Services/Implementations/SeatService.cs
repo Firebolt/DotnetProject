@@ -7,12 +7,12 @@ namespace FinalProject.Services.Implementations
     public class SeatService : ISeatService
     {
         private readonly ISeatRepository _seatRepository;
-        private readonly IRepository<Flight> _flight;
+        private readonly IRepository<Flight> _flightRepository;
 
-        public SeatService(ISeatRepository seatRepository, IRepository<Flight> flight)
+        public SeatService(ISeatRepository seatRepository, IRepository<Flight> flightRepository)
         {
             _seatRepository = seatRepository;
-            _flight = flight;
+            _flightRepository = flightRepository;
         }
 
         public async Task<IEnumerable<Seat>> GetAllSeatsAsync()
@@ -25,14 +25,21 @@ namespace FinalProject.Services.Implementations
             return await _seatRepository.GetSeatAsync(flightId, seatName);
         }
 
+        public async Task<IEnumerable<Seat>> GetSeatsAsync(int flightId)
+        {
+            return await _seatRepository.GetSeatsAsync(flightId);
+        }
+
         public async Task CreateSeatAsync(int flightId, string seatName)
         {
+            var flight = await _flightRepository.GetById(flightId);
             var newSeat = new Seat
             {
                 FID = flightId,
                 Name = seatName,
                 Booked = false,
-                Flight = await _flight.GetById(flightId)
+                Flight = flight,
+                TicketCost = flight.TicketCost
             };
 
             await _seatRepository.AddSeatAsync(newSeat);

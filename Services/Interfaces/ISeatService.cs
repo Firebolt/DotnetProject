@@ -6,6 +6,7 @@ namespace FinalProject.Services.Interfaces
     {
         Task<IEnumerable<Seat>> GetAllSeatsAsync();
         Task<Seat> GetSeatAsync(int flightId, string seatName);
+        Task<IEnumerable<Seat>> GetSeatsAsync(int flightId);
         Task CreateSeatAsync(int flightId, string seatName);
         Task UpdateSeatAsync(int flightId, string seatName, bool isBooked);
         Task DeleteSeatAsync(int flightId, string seatName);

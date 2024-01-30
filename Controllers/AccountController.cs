@@ -32,8 +32,6 @@ namespace FinalProject.Controllers
                 new SelectListItem { Text = "Admin", Value = "Administrator" }
             };
 
-            roles.Insert(0, new SelectListItem { Text = "Select a role", Value = "" });
-
             var model = new UserRequest
             {
                 Username = "",

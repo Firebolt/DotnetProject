@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.Services.Implementations;
 using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,13 +13,20 @@ namespace FinalProject.Controllers
         private readonly IFlightService _flightService;
         private readonly IQueryService _queryService;
         private readonly UserManager<User> _userManager;
+        private readonly ISeatService _seatService;
 
-        public HomeController(ILogger<HomeController> logger, IFlightService flightService, IQueryService queryService, UserManager<User> userManager)
+        public HomeController(
+            ILogger<HomeController> logger,
+            IFlightService flightService,
+            IQueryService queryService,
+            UserManager<User> userManager,
+            ISeatService seatService)
         {
             _logger = logger;
             _flightService = flightService;
             _queryService = queryService;
             _userManager = userManager;
+            _seatService = seatService;
         }
 
         [HttpGet]
@@ -75,6 +83,23 @@ namespace FinalProject.Controllers
         {
             var result = await _flightService.GetFlightByIdAsync(id);
             return (result == null)? RedirectToAction("Index"): View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Book(int id)
+        {
+            var result = await _seatService.GetSeatsAsync(id);
+            result = result
+                .OrderBy(s => int.Parse(string.Join("", s.Name.Where(char.IsDigit))))
+                .ThenBy(s => s.Name)
+                .ToList();
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Book(IEnumerable<Seat> seats)
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

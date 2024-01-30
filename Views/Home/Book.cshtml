@@ -1,0 +1,69 @@
+@model IEnumerable<Seat>
+@{
+    ViewData["Title"] = "Book ticket";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Book", "Home", FormMethod.Post))
+    {
+        var seatPrice = 10; // Assuming constant price
+
+        @foreach (var seat in Model)
+        {
+            <div class="form-group">
+                @Html.DisplayFor(modelItem => seat.Name)
+                @Html.HiddenFor(modelItem => seat.Name)
+                @if (seat.Booked)
+                {
+                    @Html.CheckBoxFor(modelItem => seat.Booked, new { @disabled = "disabled" })
+                }
+                else
+                {
+                    @Html.CheckBoxFor(modelItem => seat.Booked)
+                }
+                @if (seat.Name.EndsWith('C'))
+                {
+                    <span style="margin-right: 20px;"></span>
+                }
+                @if (seat.Name.EndsWith('F'))
+                {
+                    <br>
+                }
+            </div>
+        }
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            <span>Total Price: $<span id="totalPrice">0</span></span>
+        </div>
+    }
+    @Html.ActionLink("Back to flights", "Index")
+    <script>
+        var seatPrice = @Model.ElementAt(0).TicketCost;
+
+        $(document).ready(function () {
+            $(':checkbox').change(function () {
+                calculateTotalPrice();
+            });
+        });
+
+        function calculateTotalPrice() {
+            var totalPrice = 0;
+            $(':checkbox:checked').each(function () {
+                var seatIndex = $(this).closest('.form-group').index();
+                totalPrice += +seatPrice;
+                console.log(totalPrice);
+            });
+
+            $('#totalPrice').text(totalPrice.toFixed(2));
+        }
+    </script>
+</body>
+</html>

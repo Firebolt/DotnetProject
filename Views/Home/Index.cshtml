@@ -1,95 +1,125 @@
-﻿    @model IEnumerable<FinalProject.Models.Flight>
-    @{
-        ViewData["Title"] = "Home Page";
-    }
+﻿@model IEnumerable<FinalProject.Models.Flight>
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-    <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="utf-8" />
-            <title>@ViewData["Title"]</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </head>
-        <body>
-
-        <div class="sidebar">
-            <h2>Filter Flights</h2>
-            <form id="filterForm">
-                <div class="form-group">
-                    <label for="takeoffLocation">Takeoff Location:</label>
-                    @{
-                        var takeoffLocations = Model.Select(f => f.TakeOffLocation).Distinct().ToList();
-                        takeoffLocations.Insert(0, "All");
-                    }
-                    @Html.DropDownList("takeoffLocation", new SelectList(takeoffLocations))
-                </div>
-                <div class="form-group">
-                    <label for="destination">Destination:</label>
-                    @{
-                        var destinations = Model.Select(f => f.Destination).Distinct().ToList();
-                        destinations.Insert(0, "All");
-                    }
-                    @Html.DropDownList("destination", new SelectList(destinations))
-                </div>
-                <div class="form-group">
-                    <label for="maxTicketCost">Max Ticket Cost:</label>
-                    <input type="range" id="maxTicketCostSlider" min="0" max="@Model.Max(f => f.TicketCost)" step="0.10" value="@Model.Max(f => f.TicketCost)">
-                    <span id="maxTicketCostValue">@Model.Max(f => f.TicketCost)</span>
-                </div>
-                <div class="form-group">
-                    <label for="FlightId">Flight Number:</label>
-                    <input type="number" id="FlightId" name="FlightId" pattern="\d*" placeholder="Enter Flight Number">
-                </div>
-                <button type="button" onclick="filterFlights()">Apply Filters</button>
-            </form>
-        </div>
-
-
-
-        <div id="flightTable">
-            @Html.Partial("_FlightList")
-        </div>
-
-        @section scripts {
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    setupMaxTicketCostSlider();
-                    filterFlights();
-                });
-
-                function setupMaxTicketCostSlider() {
-                    var maxTicketCostSlider = $("#maxTicketCostSlider")[0];
-                    var maxTicketCostValue = $("#maxTicketCostValue");
-
-                    maxTicketCostSlider.addEventListener("input", function () {
-                        maxTicketCostValue.text(maxTicketCostSlider.value);
-                    });
-                }
-
-                function filterFlights() {
-                    var takeoffLocation = $("#takeoffLocation").val();
-                    var destination = $("#destination").val();
-                    var maxTicketCost = $("#maxTicketCostSlider").val();
-                    var flightId = $("#FlightId").val();
-                    if (takeoffLocation === "All") {
-                        takeoffLocation = "";
-                    }
-                    if (destination === "All") {
-                        destination = "";
-                    }
-                    if (!flightId.trim()) {
-                        flightId = null;
-                    }
-                    $.ajax({
-                        url: '@Url.Action("FilterFlights", "Home")',
-                        type: 'GET',
-                        data: { takeoffLocation: takeoffLocation, destination: destination, maxTicketCost: maxTicketCost, flightId: flightId },
-                        success: function (data) {
-                            $("#flightTable").html(data);
-                        }
-                    });
-                }
-            </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 15vw;
+            height: 100%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        </body>
-    </html>
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <br><br>
+    <h2>Filter Flights</h2>
+    @if (Model != null && Model.Any())
+    {
+        <form id="filterForm">
+            <div class="form-group">
+                <label for="takeoffLocation">Takeoff Location:</label><br>
+                @{
+                    var takeoffLocations = Model.Select(f => f.TakeOffLocation).Distinct().ToList();
+                    takeoffLocations.Insert(0, "All");
+                }
+                @Html.DropDownList("takeoffLocation", new SelectList(takeoffLocations))
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label><br>
+                @{
+                    var destinations = Model.Select(f => f.Destination).Distinct().ToList();
+                    destinations.Insert(0, "All");
+                }
+                @Html.DropDownList("destination", new SelectList(destinations))
+            </div>
+            <div class="form-group">
+                <label for="maxTicketCost">Max Ticket Cost:</label><br>
+                <input type="range" id="maxTicketCostSlider" min="0" max="@Model.Max(f => f.TicketCost)" step="0.10" value="@Model.Max(f => f.TicketCost)">
+                <span id="maxTicketCostValue">@Model.Max(f => f.TicketCost)</span>
+            </div>
+            <div class="form-group">
+                <label for="FlightId">Flight Number:</label><br>
+                <input type="number" id="FlightId" name="FlightId" pattern="\d*" placeholder="Enter Flight Number">
+            </div>
+            <button type="button" onclick="filterFlights()">Apply Filters</button>
+        </form>
+    }
+</div>
+
+<div id="flightTable">
+    @Html.Partial("_FlightList")
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setupMaxTicketCostSlider();
+            filterFlights();
+        });
+
+        function setupMaxTicketCostSlider() {
+            var maxTicketCostSlider = $("#maxTicketCostSlider")[0];
+            var maxTicketCostValue = $("#maxTicketCostValue");
+
+            maxTicketCostSlider.addEventListener("input", function () {
+                maxTicketCostValue.text(maxTicketCostSlider.value);
+            });
+        }
+
+        function filterFlights() {
+            var takeoffLocation = $("#takeoffLocation").val();
+            var destination = $("#destination").val();
+            var maxTicketCost = $("#maxTicketCostSlider").val();
+            var flightId = $("#FlightId").val();
+            if (takeoffLocation === "All") {
+                takeoffLocation = "";
+            }
+            if (destination === "All") {
+                destination = "";
+            }
+            if (!flightId.trim()) {
+                flightId = null;
+            }
+            $.ajax({
+                url: '@Url.Action("FilterFlights", "Home")',
+                type: 'GET',
+                data: { takeoffLocation: takeoffLocation, destination: destination, maxTicketCost: maxTicketCost, flightId: flightId },
+                success: function (data) {
+                    $("#flightTable").html(data);
+                }
+            });
+        }
+    </script>
+}
+</body>
+</html>

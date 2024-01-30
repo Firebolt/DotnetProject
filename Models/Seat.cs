@@ -12,6 +12,7 @@ namespace FinalProject.Models
         public string? Name { get; set; }
         [DefaultValue(false)]
         public bool Booked { get; set; }
+        public decimal TicketCost { get; set; }
         // Navigation property for the foreign key relationship
         [Required, ForeignKey("FID")]
         public int FID { get; set; }

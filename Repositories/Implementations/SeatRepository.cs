@@ -17,6 +17,11 @@ namespace FinalProject.Repositories.Implementations
             return await _context.Seats
                 .FirstOrDefaultAsync(s => s.Name == name && s.FID == fid);
         }
+        public async Task<IEnumerable<Seat>> GetSeatsAsync(int fid)
+        {
+            return await _context.Seats
+                .Where(s => s.FID == fid).ToListAsync();
+        }
         public async Task<IEnumerable<Seat>>GetAllSeatsAsyn()
         {
 

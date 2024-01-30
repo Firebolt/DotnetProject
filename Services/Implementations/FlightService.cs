@@ -29,8 +29,8 @@ namespace FinalProject.Services.Implementations
             {
                 NumofRows = flightRequest.NumofRows,
                 TicketCost = flightRequest.TicketCost,
-                DeparDateandTimeOffset = flightRequest.DeparDateandTimeOffset,
-                ArrDateandTimeOffset = flightRequest.ArrDateandTimeOffset,
+                DeparDateandTimeOffset = flightRequest.DeparDateandTimeOffset.ToUniversalTime(),
+                ArrDateandTimeOffset = flightRequest.ArrDateandTimeOffset.ToUniversalTime(),
                 Destination = flightRequest.Destination,
                 TakeOffLocation = flightRequest.TakeOffLocation,
                 FlightDuration = flightRequest.FlightDuration,
