@@ -48,8 +48,7 @@ namespace FinalProject.Controllers
             }
             return PartialView("_FlightList", filteredFlights);
         }
-
-        [HttpGet("/YourQueries")]
+        
         public async Task<IActionResult> QueryList()
         {
             return View();

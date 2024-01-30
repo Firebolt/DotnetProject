@@ -30,6 +30,10 @@
                         @if (User.IsInRole("Administrator"))
                         {
                             <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="QueryList">Queries</a>
+                            </li>
+                        } else {
+                            <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="QueryList">Queries</a>
                             </li>
                         }

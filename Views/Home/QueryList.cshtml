@@ -4,24 +4,31 @@
 }
 
 @Html.ActionLink("Ask new question", "Query")
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Question)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Answer)
-        </th>
-    </tr>
-    @foreach (var query in Model)
-    {
+@if (Model != null && Model.Any())
+{
+    <table>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => query.Question)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => query.Answer)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
         </tr>
-    }
-</table>
+        @foreach (var query in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => query.Question)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => query.Answer)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>You have asked no queries.</p>
+}
