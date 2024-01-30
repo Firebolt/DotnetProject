@@ -33,7 +33,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost, int? id)
+        public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost, int? flightId)
         {
             var filteredFlights = await _flightService.GetAllFlightsAsync();
             filteredFlights = filteredFlights
@@ -41,7 +41,7 @@ namespace FinalProject.Controllers
                     (string.IsNullOrEmpty(takeoffLocation) || f.TakeOffLocation == takeoffLocation) &&
                     (string.IsNullOrEmpty(destination) || f.Destination == destination) &&
                     f.TicketCost <= maxTicketCost &&
-                    (id == null || f.FID == id))
+                    (flightId == null || f.FID == flightId))
                 .ToList();
 
             return PartialView("_FlightList", filteredFlights);
