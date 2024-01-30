@@ -7,25 +7,29 @@
 @if (Model != null && Model.Any())
 {
     <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Question)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Answer)
-            </th>
-        </tr>
-        @foreach (var query in Model)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => query.Question)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => query.Answer)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer)
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var query in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => query.Question)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => query.Answer)
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else

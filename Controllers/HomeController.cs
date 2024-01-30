@@ -48,10 +48,12 @@ namespace FinalProject.Controllers
             }
             return PartialView("_FlightList", filteredFlights);
         }
-        
+
         public async Task<IActionResult> QueryList()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var queries = await _queryService.GetQueryByUserIdAsync(user.Id);
+            return View(queries);
         }
 
         [HttpGet]

@@ -6,6 +6,7 @@ namespace FinalProject.Services.Interfaces
     {
         Task<IEnumerable<Query>> GetAllQueriesAsync();
         Task<Query> GetQueryAsync(int queryId, string userId);
+        Task<IEnumerable<Query>> GetQueryByUserIdAsync(string userId);
         Task CreateQueryAsync(QueryRequest queryRequest, string userId);
         Task UpdateQueryAsync(int queryId, string userId, QueryRequest updatedQueryRequest);
         Task DeleteQueryAsync(int queryId, string  userId);

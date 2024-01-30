@@ -25,6 +25,11 @@ namespace FinalProject.Services.Implementations
             return await _queryRepository.GetQueryAsync(queryId, userId);
         }
 
+        public async Task<IEnumerable<Query>> GetQueryByUserIdAsync(string userId)
+        {
+            return await _queryRepository.GetQueryAsync(userId);
+        }
+
         public async Task CreateQueryAsync(QueryRequest queryRequest, string userId)
         {
             var newQuery = new Query

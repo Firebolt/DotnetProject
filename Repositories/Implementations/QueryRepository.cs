@@ -12,6 +12,13 @@ namespace FinalProject.Repositories.Implementations
         {
             _context = context;
         }
+        
+        public async Task<IEnumerable<Query>> GetQueryAsync(string id)
+        {
+            return await _context.Queries
+                .Where(q => q.Id == id).ToListAsync();
+        }
+
         public async Task<Query> GetQueryAsync(int qid, string id)
         {
              return await _context.Queries
@@ -25,12 +32,12 @@ namespace FinalProject.Repositories.Implementations
         }
         public async Task AddQueryAsync(Query query)
         {
-           _context.Queries .Add(query);
+           _context.Queries.Add(query);
             await _context.SaveChangesAsync();
         }
         public async Task UpdateQueryAsync(Query query)
         {
-            _context.Queries .Update(query);
+            _context.Queries.Update(query);
             await _context.SaveChangesAsync();
         }
 
