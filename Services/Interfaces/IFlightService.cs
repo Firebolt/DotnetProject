@@ -6,7 +6,7 @@ namespace FinalProject.Services.Interfaces
     {
         Task<IEnumerable<Flight>> GetAllFlightsAsync();
         Task<Flight> GetFlightByIdAsync(int flightId);
-        Task CreateFlightAsync(FlightRequest flightRequest);
+        Task<int> CreateFlightAsync(FlightRequest flightRequest);
         Task UpdateFlightAsync(int flightId, FlightRequest updatedFlightRequest);
         Task DeleteFlightAsync(int flightId);
     }

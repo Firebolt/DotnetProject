@@ -23,7 +23,7 @@ namespace FinalProject.Services.Implementations
             return await _flightRepository.GetById(flightId);
         }
 
-        public async Task CreateFlightAsync(FlightRequest flightRequest)
+        public async Task<int> CreateFlightAsync(FlightRequest flightRequest)
         {
             var newFlight = new Flight
             {
@@ -36,8 +36,8 @@ namespace FinalProject.Services.Implementations
                 FlightDuration = flightRequest.FlightDuration,
                 AirportLoc = flightRequest.AirportLoc
             };
-
             await _flightRepository.Add(newFlight);
+            return newFlight.FID;
         }
 
         public async Task UpdateFlightAsync(int flightId, FlightRequest updatedFlightRequest)

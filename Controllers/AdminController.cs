@@ -53,7 +53,18 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> AddFlight(FlightRequest flight)
         {
             flight.FlightDuration = flight.ArrDateandTimeOffset.Subtract(flight.DeparDateandTimeOffset);
-            await _flightService.CreateFlightAsync(flight);
+            int fid = await _flightService.CreateFlightAsync(flight);
+            for (int i = 0; i < 6; i++)
+                for (int j = 0; j < flight.NumofRows; j++)
+                {
+                    var seat = new Seat
+                    {
+                        Booked = false,
+                        FID = fid,
+                        Flight = await _flightService.GetFlightByIdAsync(fid),
+                        Name = GetSeatName(i, j)
+                    };
+                }
             return RedirectToAction("Index", "Home");
         }
 
@@ -90,6 +101,26 @@ namespace FinalProject.Controllers
             flight.FlightDuration = flight.ArrDateandTimeOffset.Subtract(flight.DeparDateandTimeOffset);
             await _flightService.UpdateFlightAsync(id, flight);
             return RedirectToAction("Index", "Home");
+        }
+        private string GetSeatName(int i, int j)
+        {
+            switch (i)
+            {
+                case 0:
+                    return j + " A";
+                case 1:
+                    return j + " B";
+                case 2:
+                    return j + " C";
+                case 3:
+                    return j + " D";
+                case 4:
+                    return j + " E";
+                case 5:
+                    return j + " F";
+                default:
+                    return "Error";
+            }
         }
     }
 }
