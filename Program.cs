@@ -30,7 +30,7 @@ namespace FinalProject
             builder.Services.AddScoped<IQueryService, QueryService>();
             builder.Services.AddScoped<IRepository<Flight>, Repository<Flight>>();
             builder.Services.AddScoped<IFlightService, FlightService>();
-            builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

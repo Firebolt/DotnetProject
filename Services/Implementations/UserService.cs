@@ -19,9 +19,9 @@ namespace FinalProject.Services.Implementations
             return await _userManager.Users.ToListAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int userId)
+        public async Task<User> GetUserByIdAsync(string userId)
         {
-            return await _userManager.FindByIdAsync(userId.ToString());
+            return await _userManager.FindByIdAsync(userId);
         }
 
         public async Task CreateUserAsync(UserRequest userRequest)
@@ -36,9 +36,9 @@ namespace FinalProject.Services.Implementations
             await _userManager.CreateAsync(newUser, userRequest.Password);
         }
 
-        public async Task UpdateUserAsync(int userId, UserRequest updatedUserRequest)
+        public async Task UpdateUserAsync(string userId, UserRequest updatedUserRequest)
         {
-            var existingUser = await _userManager.FindByIdAsync(userId.ToString());
+            var existingUser = await _userManager.FindByIdAsync(userId);
             if (existingUser != null)
             {
                 existingUser.UserName = updatedUserRequest.Username;
@@ -55,9 +55,9 @@ namespace FinalProject.Services.Implementations
             }
         }
 
-        public async Task DeleteUserAsync(int userId)
+        public async Task DeleteUserAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
                 await _userManager.DeleteAsync(user);

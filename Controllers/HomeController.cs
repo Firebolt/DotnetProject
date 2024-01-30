@@ -36,6 +36,8 @@ namespace FinalProject.Controllers
         public async Task<ActionResult> FilterFlights(string takeoffLocation, string destination, decimal maxTicketCost, int? flightId)
         {
             var filteredFlights = await _flightService.GetAllFlightsAsync();
+            if (filteredFlights != null)
+            {
             filteredFlights = filteredFlights
                 .Where(f =>
                     (string.IsNullOrEmpty(takeoffLocation) || f.TakeOffLocation == takeoffLocation) &&
@@ -43,7 +45,7 @@ namespace FinalProject.Controllers
                     f.TicketCost <= maxTicketCost &&
                     (flightId == null || f.FID == flightId))
                 .ToList();
-
+            }
             return PartialView("_FlightList", filteredFlights);
         }
 
@@ -62,7 +64,8 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Query(QueryRequest body)
         {
-            await _queryService.CreateQueryAsync(body, _userManager.GetUserAsync(HttpContext.User).Id);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            await _queryService.CreateQueryAsync(body, user.Id);
             return RedirectToAction("Index");
         }
 

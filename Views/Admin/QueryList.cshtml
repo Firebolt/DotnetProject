@@ -22,10 +22,10 @@
                 @Html.DisplayFor(modelItem => item.Answer)
             </td>
             <td>
-                @Html.ActionLink("Answer", "AnswerQuery", new {uid = item.UID, qid = item.QID})
+                @Html.ActionLink("Answer", "AnswerQuery", new {id = item.Id, qid = item.QID})
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteQuery", new {uid = item.UID, qid = item.QID})
+                @Html.ActionLink("Delete", "DeleteQuery", new {id = item.Id, qid = item.QID})
             </td>
         </tr>
     }
@@ -50,10 +50,10 @@
                 @Html.DisplayFor(modelItem => item.Answer)
             </td>
             <td>
-                @Html.ActionLink("Update Answer", "AnswerQuery", new {uid = item.UID, qid = item.QID})
+                @Html.ActionLink("Update Answer", "AnswerQuery", new {id = item.Id, qid = item.QID})
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteQuery", new {uid = item.UID, qid = item.QID})
+                @Html.ActionLink("Delete", "DeleteQuery", new {id = item.Id, qid = item.QID})
             </td>
         </tr>
     }

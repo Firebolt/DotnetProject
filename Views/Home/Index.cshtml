@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="maxTicketCost">Max Ticket Cost:</label>
-                    <input type="range" id="maxTicketCostSlider" min="0" max="@Model.Max(f => f.TicketCost)" value="@Model.Max(f => f.TicketCost)">
+                    <input type="range" id="maxTicketCostSlider" min="0" max="@Model.Max(f => f.TicketCost)" step="0.10" value="@Model.Max(f => f.TicketCost)">
                     <span id="maxTicketCostValue">@Model.Max(f => f.TicketCost)</span>
                 </div>
                 <div class="form-group">

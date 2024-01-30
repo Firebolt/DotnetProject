@@ -25,9 +25,9 @@ namespace FinalProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AnswerQuery(int qid, int uid)
+        public async Task<IActionResult> AnswerQuery(int qid, string Id)
         {
-            var query = await _queryService.GetQueryAsync(qid, uid);
+            var query = await _queryService.GetQueryAsync(qid, Id);
             return View(query);
         }
 
@@ -39,7 +39,7 @@ namespace FinalProject.Controllers
                 Question = query.Question,
                 Answer = query.Answer
             };
-            await _queryService.UpdateQueryAsync(query.QID, query.UID, body);
+            await _queryService.UpdateQueryAsync(query.QID, query.Id, body);
             return RedirectToAction("QueryList");
         }
 

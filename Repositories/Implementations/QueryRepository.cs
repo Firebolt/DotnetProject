@@ -12,10 +12,10 @@ namespace FinalProject.Repositories.Implementations
         {
             _context = context;
         }
-        public async Task<Query> GetQueryAsync(int qid, int uid)
+        public async Task<Query> GetQueryAsync(int qid, string id)
         {
              return await _context.Queries
-                .FirstOrDefaultAsync(q => q.QID == qid && q.UID == uid);
+                .FirstOrDefaultAsync(q => q.QID == qid && q.Id == id);
         }
 
         public async Task<IEnumerable<Query>> GetAllQueriesAsync()
@@ -34,7 +34,7 @@ namespace FinalProject.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteQueryAsync(int qid, int uid)
+        public async Task DeleteQueryAsync(int qid, string uid)
         {
             var query= await GetQueryAsync(qid, uid);
             if(query!=null)

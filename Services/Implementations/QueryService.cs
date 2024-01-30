@@ -7,9 +7,9 @@ namespace FinalProject.Services.Implementations
     public class QueryService : IQueryService
     {
         private readonly IQueryRepository _queryRepository;
-        private readonly IRepository<User> _user;
+        private readonly IUserRepository _user;
 
-        public QueryService(IQueryRepository queryRepository, IRepository<User> user)
+        public QueryService(IQueryRepository queryRepository, IUserRepository user)
         {
             _queryRepository = queryRepository;
             _user = user;
@@ -20,25 +20,25 @@ namespace FinalProject.Services.Implementations
             return await _queryRepository.GetAllQueriesAsync();
         }
 
-        public async Task<Query> GetQueryAsync(int queryId, int userId)
+        public async Task<Query> GetQueryAsync(int queryId, string userId)
         {
             return await _queryRepository.GetQueryAsync(queryId, userId);
         }
 
-        public async Task CreateQueryAsync(QueryRequest queryRequest, int userId)
+        public async Task CreateQueryAsync(QueryRequest queryRequest, string userId)
         {
             var newQuery = new Query
             {
-                UID = queryRequest.UID,
                 Question = queryRequest.Question,
                 Answer = queryRequest.Answer,
+                Id = userId,
                 User = await _user.GetById(userId)
             };
 
             await _queryRepository.AddQueryAsync(newQuery);
         }
 
-        public async Task UpdateQueryAsync(int queryId, int userId, QueryRequest updatedQueryRequest)
+        public async Task UpdateQueryAsync(int queryId, string userId, QueryRequest updatedQueryRequest)
         {
             var existingQuery = await _queryRepository.GetQueryAsync(queryId, userId);
             if (existingQuery != null)
@@ -50,7 +50,7 @@ namespace FinalProject.Services.Implementations
             }
         }
 
-        public async Task DeleteQueryAsync(int queryId, int userId)
+        public async Task DeleteQueryAsync(int queryId, string userId)
         {
             await _queryRepository.DeleteQueryAsync(queryId, userId);
         }
