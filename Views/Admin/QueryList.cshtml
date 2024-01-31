@@ -1,60 +1,77 @@
 @model IEnumerable<FinalProject.Models.Query>
 @{
     ViewData["Title"] = "Home Page";
+    var Answered = ViewBag.Answered as IEnumerable<FinalProject.Models.Query>;
+    var Unanswered = ViewBag.Unanswered as IEnumerable<FinalProject.Models.Query>;
 }
-
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Question)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Answer)
-        </th>
-    </tr>
-    @foreach (var item in ViewBag.Answered as IEnumerable<FinalProject.Models.Query>)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    @if (Unanswered != null && Unanswered.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelitem => item.Question)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Answer)
-            </td>
-            <td>
-                @Html.ActionLink("Answer", "AnswerQuery", new {id = item.Id, qid = item.QID})
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "DeleteQuery", new {id = item.Id, qid = item.QID})
-            </td>
-        </tr>
+        <h2>Unanswered Questions</h2>
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer)
+                </th>
+            </tr>
+            @foreach (var item in ViewBag.Unanswered as IEnumerable<FinalProject.Models.Query>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Question)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Answer)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID })
+                    </td>
+                </tr>
+            }
+        </table>
     }
-</table>
-
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Question)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Answer)
-        </th>
-    </tr>
-    @foreach (var item in ViewBag.Unanswered as IEnumerable<FinalProject.Models.Query>)
+    @if (Answered != null && Answered.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Question)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Answer)
-            </td>
-            <td>
-                @Html.ActionLink("Update Answer", "AnswerQuery", new {id = item.Id, qid = item.QID})
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "DeleteQuery", new {id = item.Id, qid = item.QID})
-            </td>
-        </tr>
+        <h2>Answered Questions</h2>
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer)
+                </th>
+            </tr>
+            @foreach (var item in ViewBag.Answered as IEnumerable<FinalProject.Models.Query>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Question)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Answer)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID })
+                    </td>
+                </tr>
+            }
+        </table>
     }
-</table>
+</body>
