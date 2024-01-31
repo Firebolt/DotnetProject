@@ -60,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9RdWVyeUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Tickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9UaWNrZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/_FlightList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9fRmxpZ2h0TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

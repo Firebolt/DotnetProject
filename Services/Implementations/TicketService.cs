@@ -18,12 +18,12 @@ namespace FinalProject.Services.Implementations
             return await _ticketRepository.GetAllTicketAsync();
         }
 
-        public async Task<Ticket> GetTicketAsync(int userId, int flightId)
+        public async Task<Ticket> GetTicketAsync(string userId, int flightId)
         {
             return await _ticketRepository.GetTicketAsync(userId, flightId);
         }
 
-        public async Task CreateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber)
+        public async Task CreateTicketAsync(string userId, int flightId, DateTime bookedDate, string seatNumber)
         {
             var newTicket = new Ticket
             {
@@ -36,7 +36,7 @@ namespace FinalProject.Services.Implementations
             await _ticketRepository.AddTicketAsync(newTicket);
         }
 
-        public async Task UpdateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber)
+        public async Task UpdateTicketAsync(string userId, int flightId, DateTime bookedDate, string seatNumber)
         {
             var existingTicket = await _ticketRepository.GetTicketAsync(userId, flightId);
             if (existingTicket != null)
@@ -48,7 +48,7 @@ namespace FinalProject.Services.Implementations
             }
         }
 
-        public async Task DeleteTicketAsync(int userId, int flightId)
+        public async Task DeleteTicketAsync(string userId, int flightId)
         {
             await _ticketRepository.DeleteTicketAsync(userId, flightId);
         }

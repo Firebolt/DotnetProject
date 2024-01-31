@@ -6,10 +6,10 @@ namespace FinalProject.Services.Interfaces
     {
 
         Task<IEnumerable<Ticket>> GetAllTicketsAsync();
-        Task<Ticket> GetTicketAsync(int userId, int flightId);
-        Task CreateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber);
-        Task UpdateTicketAsync(int userId, int flightId, DateTime bookedDate, string seatNumber);
-        Task DeleteTicketAsync(int userId, int flightId);
+        Task<Ticket> GetTicketAsync(string userId, int flightId);
+        Task CreateTicketAsync(string userId, int flightId, DateTime bookedDate, string seatNumber);
+        Task UpdateTicketAsync(string userId, int flightId, DateTime bookedDate, string seatNumber);
+        Task DeleteTicketAsync(string userId, int flightId);
 
     }
 }

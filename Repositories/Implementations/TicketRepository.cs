@@ -13,7 +13,7 @@ namespace FinalProject.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<Ticket> GetTicketAsync(int uid, int fid)
+        public async Task<Ticket> GetTicketAsync(string uid, int fid)
         {
             return await _context.Tickets
                 .FirstOrDefaultAsync(t => t.UID == uid && t.FID == fid);
@@ -36,7 +36,7 @@ namespace FinalProject.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteTicketAsync(int uid, int fid)
+        public async Task DeleteTicketAsync(string uid, int fid)
         {
             var ticket = await GetTicketAsync(uid, fid);
             if (ticket != null)

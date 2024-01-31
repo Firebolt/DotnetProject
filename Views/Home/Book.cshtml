@@ -9,13 +9,13 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxTlWWt+Oxh/JzoIcaFQDdRL2JoT0n6M" crossorigin="anonymous"></script>
 </head>
 <body>
     @using (Html.BeginForm("Book", "Home", FormMethod.Post))
     {
-        var seatPrice = 10; // Assuming constant price
-
         @foreach (var seat in Model)
         {
             <div class="form-group">
@@ -40,11 +40,32 @@
             </div>
         }
         <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-primary" />
+            <input type="button" value="Submit" class="btn btn-primary" id="submitBtn" />
             <span>Total Price: $<span id="totalPrice">0</span></span>
         </div>
     }
     @Html.ActionLink("Back to flights", "Index")
+    <div class="modal fade" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="creditCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="creditCardModalLabel">Enter Credit Card Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="creditCardNumber">Credit Card Number:</label>
+                    <input type="text" id="creditCardNumber" name="creditCardNumber" class="form-control" required>
+                    <p>Total Price: $<span id="modalTotalPrice">0.00</span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitBooking()">Submit Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         var seatPrice = @Model.ElementAt(0).TicketCost;
 
@@ -63,7 +84,16 @@
             });
 
             $('#totalPrice').text(totalPrice.toFixed(2));
+            $('#modalTotalPrice').text(totalPrice.toFixed(2));
         }
+
+        function submitBooking() {
+            $('form').submit();
+        }
+        
+        $('#submitBtn').click(function () {
+            $('#creditCardModal').modal('show');
+        });
     </script>
 </body>
 </html>

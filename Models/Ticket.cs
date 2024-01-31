@@ -6,7 +6,7 @@ namespace FinalProject.Models
     {
         [Key]
         [Required]
-        public int UID { get; set; }
+        public required string UID { get; set; }
         [Key]
         [Required]
         public int FID { get; set; }

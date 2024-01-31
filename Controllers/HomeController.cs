@@ -14,19 +14,22 @@ namespace FinalProject.Controllers
         private readonly IQueryService _queryService;
         private readonly UserManager<User> _userManager;
         private readonly ISeatService _seatService;
+        private readonly ITicketService _ticketService;
 
         public HomeController(
             ILogger<HomeController> logger,
             IFlightService flightService,
             IQueryService queryService,
             UserManager<User> userManager,
-            ISeatService seatService)
+            ISeatService seatService,
+            ITicketService ticketService)
         {
             _logger = logger;
             _flightService = flightService;
             _queryService = queryService;
             _userManager = userManager;
             _seatService = seatService;
+            _ticketService = ticketService;
         }
 
         [HttpGet]
@@ -99,6 +102,15 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Book(IEnumerable<Seat> seats)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            foreach (var seat in seats)
+            {
+                if (seat.Booked)
+                {
+                    await _seatService.UpdateSeatAsync(seat.FID, seat.Name, true);
+                    await _ticketService.CreateTicketAsync(user.Id, seat.FID, DateTime.UtcNow, seat.Name);
+                }
+            }
             return View();
         }
 
