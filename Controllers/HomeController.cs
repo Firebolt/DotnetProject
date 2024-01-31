@@ -97,7 +97,12 @@ namespace FinalProject.Controllers
                 .OrderBy(s => int.Parse(string.Join("", s.Name.Where(char.IsDigit))))
                 .ThenBy(s => s.Name)
                 .ToList();
-            return View(result);
+            if (result != null && result.Any())
+            {
+                return View(result);
+            }
+            else
+                return RedirectToAction("Index");
         }
 
         [HttpPost, Authorize]
