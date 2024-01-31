@@ -60,6 +60,7 @@ namespace FinalProject.Controllers
             return PartialView("_FlightList", filteredFlights);
         }
 
+        [HttpGet, Authorize]
         public async Task<IActionResult> QueryList()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -67,13 +68,13 @@ namespace FinalProject.Controllers
             return View(queries);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IActionResult> Query()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<IActionResult> Query(QueryRequest body)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -88,7 +89,7 @@ namespace FinalProject.Controllers
             return (result == null)? RedirectToAction("Index"): View(result);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IActionResult> Book(int id)
         {
             var result = await _seatService.GetSeatsAsync(id);
@@ -99,7 +100,7 @@ namespace FinalProject.Controllers
             return View(result);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<IActionResult> Book(IEnumerable<Seat> seats)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -111,7 +112,22 @@ namespace FinalProject.Controllers
                     await _ticketService.CreateTicketAsync(user.Id, seat.FID, DateTime.UtcNow, seat.Name);
                 }
             }
-            return View();
+            return RedirectToAction("Tickets");
+        }
+
+        [HttpGet, Authorize]
+        public async Task<IActionResult> Tickets()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var tickets = await _ticketService.GetTicketsAsync(user.Id);
+            return View(tickets);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelTicket(string uid, int fid)
+        {
+            await _ticketService.DeleteTicketAsync(uid, fid);
+            return RedirectToAction("Tickets");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

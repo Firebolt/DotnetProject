@@ -23,6 +23,11 @@ namespace FinalProject.Services.Implementations
             return await _ticketRepository.GetTicketAsync(userId, flightId);
         }
 
+        public async Task<IEnumerable<Ticket>> GetTicketsAsync(string userId)
+        {
+            return await _ticketRepository.GetTicketsAsync(userId);
+        }
+
         public async Task CreateTicketAsync(string userId, int flightId, DateTime bookedDate, string seatNumber)
         {
             var newTicket = new Ticket

@@ -19,6 +19,13 @@ namespace FinalProject.Repositories.Implementations
                 .FirstOrDefaultAsync(t => t.UID == uid && t.FID == fid);
         }
 
+        public async Task<IEnumerable<Ticket>> GetTicketsAsync(string uid)
+        {
+            return await _context.Tickets
+                .Where(t => t.UID == uid).ToListAsync();
+        }
+
+
         public async Task<IEnumerable<Ticket>> GetAllTicketsAsync()
         {
             return await _context.Tickets.ToListAsync();
