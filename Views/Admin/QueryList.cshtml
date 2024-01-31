@@ -19,19 +19,13 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Question)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Answer)
-                </th>
+                </th>=
             </tr>
             @foreach (var item in ViewBag.Unanswered as IEnumerable<FinalProject.Models.Query>)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Question)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Answer)
                     </td>
                     <td>
                         @Html.ActionLink("Update Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID})
