@@ -45,6 +45,13 @@ namespace FinalProject.Controllers
             return RedirectToAction("QueryList");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuery(string id, int qid)
+        {
+            await _queryService.DeleteQueryAsync(qid, id);
+            return RedirectToAction("QueryList");
+        }
+
         [HttpGet]
         public IActionResult AddFlight()
         {

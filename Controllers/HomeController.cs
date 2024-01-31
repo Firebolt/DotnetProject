@@ -98,9 +98,7 @@ namespace FinalProject.Controllers
                 .ThenBy(s => s.Name)
                 .ToList();
             if (result != null && result.Any())
-            {
                 return View(result);
-            }
             else
                 return RedirectToAction("Index");
         }
@@ -131,6 +129,8 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> CancelTicket(string uid, int fid)
         {
+            var currentTicket = await _ticketService.GetTicketAsync(uid, fid);
+            await _seatService.UpdateSeatAsync(fid, currentTicket.SeatNumber, false);
             await _ticketService.DeleteTicketAsync(uid, fid);
             return RedirectToAction("Tickets");
         }
