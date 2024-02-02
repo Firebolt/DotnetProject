@@ -6,8 +6,9 @@ namespace FinalProject.Models
     {
         [Required,DataType(DataType.Password)]
         public required string Password { get; set; }
-        [Required, DataType(DataType.EmailAddress)]
-        public required string Email { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string? Email { get; set; }
+        public string? Username { get; set; }
         [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }

@@ -106,21 +106,30 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
+                if (model.Email == null && model.Username == null)
                 {
-                    if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
-                    {
-                        var user = await _userManager.FindByEmailAsync(model.Email);
-                        var roles = await _userManager.GetRolesAsync(user);
-                        var claims = User.Claims;
+                    ModelState.AddModelError(string.Empty, "Enter Username or Email");
+                    return View(model);
+                }
 
-                        return Redirect(ReturnUrl);
-                    }
-                    else
+                var user = (model.Email!= null) ? await _userManager.FindByEmailAsync(model.Email): await _userManager.FindByNameAsync(model.Username);
+
+                if (await _userManager.CheckPasswordAsync(user, model.Password))
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                        {
+                            var roles = await _userManager.GetRolesAsync(user);
+                            var claims = User.Claims;
+
+                            return Redirect(ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
                 else

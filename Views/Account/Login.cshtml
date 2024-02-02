@@ -8,26 +8,32 @@
 
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = returnUrl }, FormMethod.Post))
 {
-    <div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email)
-        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(model => model.Username)
+    @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Password)
+    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="form-check">
+        @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+        @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label" })
     </div>
+</div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        <div class="form-check">
-            @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
-            @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label" })
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
+<button type="submit" class="btn btn-primary">Login</button>
 }

@@ -7,127 +7,115 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
 
-        main {
-            flex: 1;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        .footer {
-            flex-shrink: 0;
-        }
-        header {
-            z-index: 1000;
-        }
-    </style>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="~/css/fontawesome.css">
+    <link rel="stylesheet" href="~/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="~/css/owl.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid d-flex justify-content-end">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DotNetAirline</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        @if (User.IsInRole("Administrator"))
-                        {
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <ul class="nav">
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="QueryList">Queries</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-                        } else {
+                            <li >
+                                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            @if (User.IsInRole("Administrator"))
+                            {
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="QueryList">Queries</a>
+                                <a asp-area="" asp-controller="Admin" asp-action="QueryList">Queries</a>
+                            </li>
+                            } else {
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="QueryList">Queries</a>
                             </li>
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tickets">Your Tickets</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Tickets">Your Tickets</a>
                             </li>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <button class="btn btn-link nav-link text-dark" id="logoutButton" type="button">Logout</button>
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Query">Ask a Question</a>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <li>
+                                <button id="logoutButton" type="button">Logout</button>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                            }
+                            else
+                            {
+                            <li >
+                                <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
-                        }
-                    </ul>
+                            <li >
+                                <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                            </li>
+                            }
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-top:70px">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted mt-auto">
-        <div class="container">
-            &copy; 2024 - FinalProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Query">Ask a Question</a>
-            }
+        <div class="container" style="color:white">
+            &copy; 2024 - FinalProject
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
-<div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="logoutConfirmationModalLabel">Confirm Logout</h5>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to logout?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelLogoutButton" data-dismiss="modal">Cancel</button>
-                <form id="logoutForm" asp-action="Logout" asp-controller="Account" method="post">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-primary" id="confirmLogoutButton">Logout</button>
-                </form>
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutConfirmationModalLabel">Confirm Logout</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelLogoutButton" data-dismiss="modal">Cancel</button>
+                    <form id="logoutForm" asp-action="Logout" asp-controller="Account" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary" id="confirmLogoutButton">Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    $(document).ready(function () {
-        $('#logoutButton').on('click', function () {
-            $('#logoutConfirmationModal').modal('show');
-        });
+    <script>
+        $(document).ready(function () {
+            $('#logoutButton').on('click', function () {
+                $('#logoutConfirmationModal').modal('show');
+            });
 
-        $('#cancelLogoutButton').on('click', function () {
-            $('#logoutConfirmationModal').modal('hide');
+            $('#cancelLogoutButton').on('click', function () {
+                $('#logoutConfirmationModal').modal('hide');
+            });
         });
-    });
-</script>
+    </script>
