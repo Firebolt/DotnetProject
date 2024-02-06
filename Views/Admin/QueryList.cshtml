@@ -10,6 +10,47 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+      
+
+        a.button {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #4caf50; /* Light Green */
+            color: white;
+            border-radius: 4px;
+        }
+
+        a.button:hover {
+            background-color: #45a049; /* Darker Green on hover */
+        }
+    </style>
 </head>
 <body>
     @if (Unanswered != null && Unanswered.Any())
@@ -19,7 +60,7 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Question)
-                </th>=
+                </th>
             </tr>
             @foreach (var item in ViewBag.Unanswered as IEnumerable<FinalProject.Models.Query>)
             {
@@ -28,10 +69,10 @@
                         @Html.DisplayFor(modelItem => item.Question)
                     </td>
                     <td>
-                        @Html.ActionLink("Update Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID})
+                        @Html.ActionLink("Update Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID}, new {@class = "button"})
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID })
+                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID }, new {@class = "button"})
                     </td>
                 </tr>
             }
@@ -59,13 +100,14 @@
                         @Html.DisplayFor(modelItem => item.Answer)
                     </td>
                     <td>
-                        @Html.ActionLink("Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID})
+                        @Html.ActionLink("Answer", "AnswerQuery", new {Id = item.Id, qid = item.QID}, new {@class = "button"})
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID })
+                        @Html.ActionLink("Delete", "DeleteQuery", new { id = item.Id, qid = item.QID }, new {@class = "button"})
                     </td>
                 </tr>
             }
         </table>
     }
 </body>
+</html>

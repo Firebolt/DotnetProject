@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\FinalProject.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\wwwroot\\css\\StyleSheet.css",
+      "PackagePath": "staticwebassets\\css\\StyleSheet.css"
+    },
+    {
       "Id": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\wwwroot\\css\\animate.css",
       "PackagePath": "staticwebassets\\css\\animate.css"
     },

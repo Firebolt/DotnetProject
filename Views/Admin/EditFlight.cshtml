@@ -1,47 +1,128 @@
 @model FinalProject.Models.FlightRequest
 
-@using (Html.BeginForm("Editflight", "Admin", FormMethod.Post))
+@using (Html.BeginForm("Editflight", "Admin", FormMethod.Post, new { @class = "flight-request-form" }))
 {
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumofRows)
-        @Html.TextAreaFor(model => model.NumofRows)
-        @Html.ValidationMessageFor(model=> model.NumofRows)
+@Html.AntiForgeryToken()
+
+<div class="form-row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumofRows)
+            @Html.TextAreaFor(model => model.NumofRows, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NumofRows, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TicketCost)
+            @Html.TextAreaFor(model => model.TicketCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketCost, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeparDateandTimeOffset)
+            @Html.TextAreaFor(model => model.DeparDateandTimeOffset, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DeparDateandTimeOffset, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArrDateandTimeOffset)
+            @Html.TextAreaFor(model => model.ArrDateandTimeOffset, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ArrDateandTimeOffset, "", new { @class = "text-danger" })
+        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.TicketCost)
-        @Html.TextAreaFor(model => model.TicketCost)
-        @Html.ValidationMessageFor(model=> model.TicketCost)
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destination)
+            @Html.TextAreaFor(model => model.Destination, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TakeOffLocation)
+            @Html.TextAreaFor(model => model.TakeOffLocation, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TakeOffLocation, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AirportLoc)
+            @Html.TextAreaFor(model => model.AirportLoc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AirportLoc, "", new { @class = "text-danger" })
+        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DeparDateandTimeOffset)
-        @Html.TextAreaFor(model => model.DeparDateandTimeOffset)
-        @Html.ValidationMessageFor(model=> model.DeparDateandTimeOffset)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ArrDateandTimeOffset)
-        @Html.TextAreaFor(model => model.ArrDateandTimeOffset)
-        @Html.ValidationMessageFor(model=> model.ArrDateandTimeOffset)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Destination)
-        @Html.TextAreaFor(model => model.Destination)
-        @Html.ValidationMessageFor(model=> model.Destination)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.TakeOffLocation)
-        @Html.TextAreaFor(model => model.TakeOffLocation)
-        @Html.ValidationMessageFor(model=> model.TakeOffLocation)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.AirportLoc)
-        @Html.TextAreaFor(model => model.AirportLoc)
-        @Html.ValidationMessageFor(model=> model.AirportLoc)
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </div>
+</div>
+
+<div class="form-group">
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</div>
 }
+
 <div>
     @Html.ActionLink("Back to list", "QueryList")
 </div>
+
+<style>
+    body {
+        padding-bottom: 60px; /* Adjust the value based on your footer's height */
+    }
+
+    .flight-request-form {
+        max-width: 800px;
+        margin: 5px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .col-md-6 {
+        width: 48%; /* Adjust the width as needed */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    a {
+        color: #007bff;
+    }
+</style>

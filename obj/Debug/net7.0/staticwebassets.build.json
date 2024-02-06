@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2ORzGV9ZuwznFRuHyodkVXdWYJ1W7OYnXGnmizUw9Ys=",
+  "Hash": "7vzGnGQsjMSHMtvi/elRTTX2KRHji+fTst6PxE/5Ktg=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\owl.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\wwwroot\\css\\StyleSheet.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/StyleSheet.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StyleSheet.css"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\wwwroot\\css\\templatemo-woox-travel.css",

@@ -2,28 +2,107 @@
 @{
     ViewData["Title"] = "Ask a Question";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        h2 {
+            color: #45a049;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        form {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom:20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical; /* Allow vertical resizing of the textarea */
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #45a049;
+            }
+
+        .back-link {
+          
+            margin-top: 40px;
+            color: #007bff;
+            text-decoration: none;
+            text-align: center;
+            
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+    </style>
 </head>
 <body>
     <h2>Ask a Question</h2>
     @using (Html.BeginForm("Query", "Home", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            @Html.LabelFor(model => model.Question)
-            @Html.TextAreaFor(model => model.Question)
-            @Html.ValidationMessageFor(model=> model.Question)
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-primary" />
-        </div>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.Question)
+        @Html.TextAreaFor(model => model.Question, new { rows = 6 })
+        @Html.ValidationMessageFor(model => model.Question)
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn-primary" />
+    </div>
     }
     <div>
-        @Html.ActionLink("Back to home", "Index")
+        @Html.ActionLink("Back to Home", "Index", null, new { @class = "back-link" })
     </div>
 </body>
+</html>

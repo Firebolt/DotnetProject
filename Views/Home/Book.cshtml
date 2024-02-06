@@ -12,11 +12,49 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxTlWWt+Oxh/JzoIcaFQDdRL2JoT0n6M" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        #submitBtn {
+            margin-top: 10px;
+        }
+
+        #totalPrice, #modalTotalPrice {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .modal-body p {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
+
 <body>
     @using (Html.BeginForm("Book", "Home", FormMethod.Post))
     {
-        @foreach (var seat in Model)
+        foreach (var seat in Model)
         {
             <div class="form-group">
                 @Html.DisplayFor(modelItem => seat.Name)
