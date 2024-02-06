@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240130122459_UpdateModels")]
-    partial class UpdateModels
+    [Migration("20240206172548_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,6 @@ namespace FinalProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("QID"));
 
                     b.Property<string>("Answer")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Id")
@@ -109,6 +108,9 @@ namespace FinalProject.Migrations
                     b.Property<int>("FlightFID")
                         .HasColumnType("integer");
 
+                    b.Property<decimal>("TicketCost")
+                        .HasColumnType("numeric");
+
                     b.HasKey("Name");
 
                     b.HasIndex("FlightFID");
@@ -118,8 +120,8 @@ namespace FinalProject.Migrations
 
             modelBuilder.Entity("FinalProject.Models.Ticket", b =>
                 {
-                    b.Property<int>("UID")
-                        .HasColumnType("integer");
+                    b.Property<string>("UID")
+                        .HasColumnType("text");
 
                     b.Property<int>("FID")
                         .HasColumnType("integer");
@@ -128,10 +130,11 @@ namespace FinalProject.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SeatNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("UID", "FID");
+
+                    b.HasIndex("FID");
 
                     b.ToTable("Tickets");
                 });
@@ -353,6 +356,25 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Flight");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.Ticket", b =>
+                {
+                    b.HasOne("FinalProject.Models.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

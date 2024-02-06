@@ -126,6 +126,12 @@ namespace FinalProject.Controllers
             return View(tickets);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CancelTicketGet(string uid, int fid)
+        {
+            return await CancelTicket(uid, fid);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CancelTicket(string uid, int fid)
         {

@@ -127,10 +127,11 @@ namespace FinalProject.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SeatNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("UID", "FID");
+
+                    b.HasIndex("FID");
 
                     b.ToTable("Tickets");
                 });
@@ -352,6 +353,25 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Flight");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.Ticket", b =>
+                {
+                    b.HasOne("FinalProject.Models.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

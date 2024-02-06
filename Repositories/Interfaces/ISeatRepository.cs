@@ -9,7 +9,7 @@ namespace FinalProject.Repositories.Interfaces
         Task<IEnumerable<Seat>> GetAllSeatsAsync();
         Task AddSeatAsync (Seat seat);
         Task UpdateSeatAsync(Seat seat);
-        Task DeleteSeatAsync(int fid, string seatName );
+        Task DeleteSeatAsync(int fid, string seatName);
 
     }
 }

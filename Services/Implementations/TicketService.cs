@@ -7,10 +7,13 @@ namespace FinalProject.Services.Implementations
     public class TicketService : ITicketService
     {
         private readonly ITicketRepository _ticketRepository;
-
-        public TicketService(ITicketRepository ticketRepository)
+        private readonly IUserService _userService;
+        private readonly IFlightService _flightService;
+        public TicketService(ITicketRepository ticketRepository, IUserService userService, IFlightService flightService)
         {
             _ticketRepository = ticketRepository;
+            _userService = userService;
+            _flightService = flightService;
         }
 
         public async Task<IEnumerable<Ticket>> GetAllTicketsAsync()
@@ -33,7 +36,9 @@ namespace FinalProject.Services.Implementations
             var newTicket = new Ticket
             {
                 UID = userId,
+                user = await _userService.GetUserByIdAsync(userId),
                 FID = flightId,
+                Flight = await _flightService.GetFlightByIdAsync(flightId),
                 BookedDate = bookedDate,
                 SeatNumber = seatNumber
             };

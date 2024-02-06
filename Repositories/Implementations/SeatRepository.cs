@@ -12,7 +12,7 @@ namespace FinalProject.Repositories.Implementations
         {
             _context = context;
         }
-        public async Task<Seat> GetSeatAsync(string name, int fid)
+        public async Task<Seat> GetSeatAsync(int fid, string name)
         {
             return await _context.Seats
                 .FirstOrDefaultAsync(s => s.Name == name && s.FID == fid);
@@ -22,7 +22,7 @@ namespace FinalProject.Repositories.Implementations
             return await _context.Seats
                 .Where(s => s.FID == fid).ToListAsync();
         }
-        public async Task<IEnumerable<Seat>>GetAllSeatsAsyn()
+        public async Task<IEnumerable<Seat>>GetAllSeatsAsync()
         {
 
             return await _context.Seats.ToListAsync();
@@ -37,30 +37,15 @@ namespace FinalProject.Repositories.Implementations
             _context.Seats.Update(seat);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteSeatAsync(string name, int fid)
+        public async Task DeleteSeatAsync(int fid, string name)
         {
-            var seat = await GetSeatAsync(name, fid);
+            var seat = await GetSeatAsync(fid, name);
             if (seat != null)
             {
                 _context.Seats.Remove(seat);
                 await _context.SaveChangesAsync();
             }
            
-        }
-
-        public Task<Seat> GetSeatAsync(int fid, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Seat>> GetAllSeatsAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteSeatAsync(int fid, string name)
-        {
-            throw new NotImplementedException();
         }
     }
 }

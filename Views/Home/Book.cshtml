@@ -9,7 +9,6 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxTlWWt+Oxh/JzoIcaFQDdRL2JoT0n6M" crossorigin="anonymous"></script>
     <style>
@@ -54,31 +53,33 @@
 <body>
     @using (Html.BeginForm("Book", "Home", FormMethod.Post))
     {
-        foreach (var seat in Model)
+        var seats = Model.ToList();
+        for (int i = 0; i < seats.Count; i++)
         {
             <div class="form-group">
-                @Html.DisplayFor(modelItem => seat.Name)
-                @Html.HiddenFor(modelItem => seat.Name)
-                @if (seat.Booked)
+                @Html.DisplayFor(modelItem => seats[i].Name)
+                @Html.HiddenFor(modelItem => seats[i].Name)
+                @Html.HiddenFor(modelItem => seats[i].FID)
+                @if (seats[i].Booked)
                 {
-                    @Html.CheckBoxFor(modelItem => seat.Booked, new { @disabled = "disabled" })
+                    @Html.CheckBoxFor(modelItem => seats[i].Booked, new { @disabled = "disabled" })
                 }
                 else
                 {
-                    @Html.CheckBoxFor(modelItem => seat.Booked)
+                    @Html.CheckBoxFor(modelItem => seats[i].Booked)
                 }
-                @if (seat.Name.EndsWith('C'))
+                @if (seats[i].Name.EndsWith('C'))
                 {
                     <span style="margin-right: 20px;"></span>
                 }
-                @if (seat.Name.EndsWith('F'))
+                @if (seats[i].Name.EndsWith('F'))
                 {
                     <br>
                 }
             </div>
         }
         <div class="form-group">
-            <input type="button" value="Submit" class="btn btn-primary" id="submitBtn" />
+            <input type="submit" value="Submit" class="btn btn-primary" id="submitBtn" />
             <span>Total Price: $<span id="totalPrice">0</span></span>
         </div>
     }
@@ -106,32 +107,23 @@
     </div>
     <script>
         var seatPrice = @Model.ElementAt(0).TicketCost;
-
+        var initialCheckedCount;
         $(document).ready(function () {
+            initialCheckedCount = $(':checkbox:checked').length;
+
             $(':checkbox').change(function () {
                 calculateTotalPrice();
             });
         });
 
         function calculateTotalPrice() {
-            var totalPrice = 0;
-            $(':checkbox:checked').each(function () {
-                var seatIndex = $(this).closest('.form-group').index();
-                totalPrice += +seatPrice;
-                console.log(totalPrice);
-            });
+            var currentCheckedCount = $(':checkbox:checked').length;
+            var additionalSeats = Math.max(0, currentCheckedCount - initialCheckedCount);
+            var totalPrice = additionalSeats * seatPrice;
 
             $('#totalPrice').text(totalPrice.toFixed(2));
             $('#modalTotalPrice').text(totalPrice.toFixed(2));
         }
-
-        function submitBooking() {
-            $('form').submit();
-        }
-        
-        $('#submitBtn').click(function () {
-            $('#creditCardModal').modal('show');
-        });
     </script>
 </body>
 </html>

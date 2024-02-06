@@ -14,7 +14,7 @@ namespace FinalProject.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Ticket>().HasKey(x => new {x.UID, x.FID});
+            modelBuilder.Entity<Ticket>().HasKey(x => new {x.UID, x.FID, x.SeatNumber});
             base.OnModelCreating(modelBuilder);
         }
     }

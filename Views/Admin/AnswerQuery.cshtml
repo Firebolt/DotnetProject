@@ -1,19 +1,23 @@
 @model FinalProject.Models.Query
 @using (Html.BeginForm("AnswerQuery", "Admin", FormMethod.Post, new { @class = "answer-form" }))
 {
-@Html.AntiForgeryToken()
-<div class="question-container">
-    @Html.DisplayFor(model => model.Question)
-</div>
-<div class="form-group">
-    @Html.LabelFor(model => model.Answer)
-    @Html.TextAreaFor(model => model.Answer, new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
-</div>
-<div class="form-group">
-    <input type="submit" value="Submit" class="btn btn-primary" />
-</div>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.QID)
+    @Html.HiddenFor(model => model.Id)
+    <div class="question-container">
+        @Html.DisplayFor(model => model.Question)
+        @Html.HiddenFor(model => model.Question)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Answer)
+        @Html.TextAreaFor(model => model.Answer, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
 }
+
 <div class="back-link">
     @Html.ActionLink("Back to list", "QueryList")
 </div>
