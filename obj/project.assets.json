@@ -1350,24 +1350,26 @@
     ]
   },
   "packageFolders": {
-    "/home/firebolt/.nuget/packages/": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\FinalProject.csproj",
       "projectName": "FinalProject",
-      "projectPath": "/home/firebolt/UniversityWork/git/DotnetProject/FinalProject.csproj",
-      "packagesPath": "/home/firebolt/.nuget/packages/",
-      "outputPath": "/home/firebolt/UniversityWork/git/DotnetProject/obj/",
+      "projectPath": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\FinalProject.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\DotnetProject\\DotnetProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/firebolt/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1428,7 +1430,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.115/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   },

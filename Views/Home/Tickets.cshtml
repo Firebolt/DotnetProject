@@ -1,50 +1,65 @@
 @model IEnumerable<FinalProject.Models.Ticket>
-@{
+    @{
     ViewData["Title"] = "Your tickets";
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewData["Title"]</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-    @if (Model != null && Model.Any())
+    }
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewData["Title"]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            td:last-child {
+                text-align: center;
+            }
+
+            .cancel-link {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        @if (Model != null && Model.Any())
     {
         <table>
             <thead>
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BookedDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SeatNumber)
-                    </th>
+                    <th>FID</th>
+                    <th>Booked Date</th>
+                    <th>Seat Number</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var ticket in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => ticket.FID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => ticket.BookedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => ticket.SeatNumber)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Cancel", "CancelTicket", new { uid = ticket.UID, fid = ticket.FID })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => ticket.FID)</td>
+                    <td>@Html.DisplayFor(modelItem => ticket.BookedDate)</td>
+                    <td>@Html.DisplayFor(modelItem => ticket.SeatNumber)</td>
+                    <td>
+                        @Html.ActionLink("Cancel", "CancelTicket", new { uid = ticket.UID, fid = ticket.FID }, new { @class = "cancel-link" })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
     }
-</body>
+    </body>
+</html>

@@ -9,81 +9,81 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FinalProject
 build_property.RootNamespace = FinalProject
-build_property.ProjectDir = /home/firebolt/UniversityWork/git/DotnetProject/
+build_property.ProjectDir = C:\Users\user\Desktop\DotnetProject\DotnetProject\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/firebolt/UniversityWork/git/DotnetProject
+build_property.MSBuildProjectDirectory = C:\Users\user\Desktop\DotnetProject\DotnetProject
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Account/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Admin/AddFlight.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQWRkRmxpZ2h0LmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Admin/AddFlight.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkRmxpZ2h0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Admin/AnswerQuery.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQW5zd2VyUXVlcnkuY3NodG1s
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Admin/AnswerQuery.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQW5zd2VyUXVlcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Admin/EditFlight.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRWRpdEZsaWdodC5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Admin/EditFlight.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEZsaWdodC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Admin/QueryList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vUXVlcnlMaXN0LmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Admin/QueryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUXVlcnlMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Book.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Cb29rLmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/Book.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Query.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9RdWVyeS5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/Query.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWVyeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/QueryList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9RdWVyeUxpc3QuY3NodG1s
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/QueryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWVyeUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/Tickets.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9UaWNrZXRzLmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/Tickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaWNrZXRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Home/_FlightList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9fRmxpZ2h0TGlzdC5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Home/_FlightList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfRmxpZ2h0TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/firebolt/UniversityWork/git/DotnetProject/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-m7ekt35oqa
+[C:/Users/user/Desktop/DotnetProject/DotnetProject/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-1iqdgs6srz

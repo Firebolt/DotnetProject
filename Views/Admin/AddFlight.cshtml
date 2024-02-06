@@ -1,47 +1,72 @@
 @model FinalProject.Models.FlightRequest
 
-@using (Html.BeginForm("AddFlight", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddFlight", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumofRows)
-        @Html.EditorFor(model => model.NumofRows)
-        @Html.ValidationMessageFor(model=> model.NumofRows)
+@Html.AntiForgeryToken()
+
+<div class="form-group">
+    @Html.LabelFor(model => model.NumofRows, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.NumofRows, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NumofRows, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.TicketCost)
-        @Html.EditorFor(model => model.TicketCost)
-        @Html.ValidationMessageFor(model=> model.TicketCost)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.TicketCost, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.TicketCost, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TicketCost, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DeparDateandTimeOffset)
-        @Html.EditorFor(model => model.DeparDateandTimeOffset)
-        @Html.ValidationMessageFor(model=> model.DeparDateandTimeOffset)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.DeparDateandTimeOffset, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.DeparDateandTimeOffset, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DeparDateandTimeOffset, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ArrDateandTimeOffset)
-        @Html.EditorFor(model => model.ArrDateandTimeOffset)
-        @Html.ValidationMessageFor(model=> model.ArrDateandTimeOffset)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ArrDateandTimeOffset, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.ArrDateandTimeOffset, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ArrDateandTimeOffset, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Destination)
-        @Html.EditorFor(model => model.Destination)
-        @Html.ValidationMessageFor(model=> model.Destination)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Destination, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Destination, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.TakeOffLocation)
-        @Html.EditorFor(model => model.TakeOffLocation)
-        @Html.ValidationMessageFor(model=> model.TakeOffLocation)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.TakeOffLocation, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.TakeOffLocation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TakeOffLocation, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.AirportLoc)
-        @Html.EditorFor(model => model.AirportLoc)
-        @Html.ValidationMessageFor(model=> model.AirportLoc)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.AirportLoc, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AirportLoc, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AirportLoc, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
         <input type="submit" value="Submit" class="btn btn-primary" />
     </div>
-}
+</div>
+
 <div>
     @Html.ActionLink("Back to list", "QueryList")
 </div>
+}
