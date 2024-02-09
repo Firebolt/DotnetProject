@@ -204,7 +204,7 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    height:80vh;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -9093,7 +9093,7 @@ textarea.form-control-lg {
 }
 
 .pb-3 {
-    padding-bottom: 1rem !important;
+    padding-bottom: 20vh !important;
 }
 
 .pb-4 {
